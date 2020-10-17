@@ -8,56 +8,181 @@ Description:  This is a card game that will support three operations
 
 
 """
-from random import choice, shuffle
+from random import *
 from enum import IntEnum, Enum
 
 full_deck = []
+partial_deck = []
+shuffle_deck = []
 
+class Player:
+    """
+    Player object sets the player attributes needed
+    """
+    name = ''
+    hand = []
+    totals = 0
 
-
-class CardNum(IntEnum):
+class CardNum(Enum):
+    """
+    Sets the card number for the deck of cards
+    """
     TWO = 2
     THREE = 3
     FOUR = 4
     FIVE = 5
     SIX = 6
     SEVEN = 7
-    EIGHT = 8
-    NINE = 9
-    TEN = 10
-    JACK = 11
-    QUEEN = 12
-    KING = 13
-    ACE = 14
 
-class CardSuit(Enum):
+class CardColor(Enum):
     """
-
+    Sets color and card amount associated of card deck
     """
-    SPADES = 'spades'
-    HEARTS = 'hearts'
-    DIAMONDS = 'diamonds'
-    CLUBS = 'clubs'
-
+    BLUE = 4
+    RED = 3
+    YELLOW = 2
+    GREEN = 1
 
 
 class CardPlay:
-    def __init__(self, value, suit):
+    """
+    CardPlay sets the value and color of object.
+    """
+    def __init__(self, value, color):
         self.card_value = value
-        self.card_suit = suit
-
-fulldecker = [CardPlay(CardNum(num), CardSuit(suit)) for suit in CardSuit for num in CardNum ]
+        self.card_color = color
 
 def build_deck() -> list:
-    for suit in CardSuit:
+    """
+    This build the deck by using the CardPlay object and appending to the deck
+    :return: full_deck list.  This is the original list
+    """
+    for color in CardColor:
         for num in CardNum:
-            full_deck.append(CardPlay(CardNum(num), CardSuit(suit)))
+            full_deck.append(CardPlay(CardNum(num), CardColor(color)))
     return full_deck
 
-def draw_random_card(deck:list) -> list:
-    random_card = deck.randint(0, len(deck)-1)
-    return deck.pop(random_card)
+def draw_random_card(deck : list) -> object:
+    """
+    Picks and removes random card from deck and returns that card
+    :param deck: This passes a copy of the deck so we dont lose original deck
+    :return: random card object
+    """
+    try:
+        rand_card = randint(0, len(deck) -1)
+        card = deck.pop(rand_card)
+        return deck.pop(rand_card)
+    except Exception as deck_error:
+        return [f"Error: {deck_error}"]
+
+def shuffle_deck(deck : list) -> list:
+    """
+    shuffles deck at random and returns the shuffled list.
+    :param deck:
+    :return: shuffled deck
+    """
+    return shuffle(deck)
+
+def sort_cards(sort_criteria : list, sort_list: list) -> list:
+    """
+    sort_cards takes 2 parameters and sort criteria and the list to be sorted.
+    :param sort_by:
+    :param sort_list:
+    :return: list sorted by criteria
+    """
+    
+def draw_cards():
+    """
+    this will draw the cards for each players hand and store card in player lists
+    :return:
+    """
+    while len(player_1) < 3 and len(player_1) < 3:
+        player_1.append(draw_random_card(deck_copy))
+        player_2.append(draw_random_card(deck_copy))
 
 
+def calculate_totals(player1, player2):
+    print("Game Is Over")
+    player1_totals = sum([x.card_color.value * x.card_value.value for x in player1.hand])
+    player2_totals = sum([x.card_color.value * x.card_value.value for x in player2.hand])
+    print(f"{player1.name}: {player1_totals}")
+    print('')
+    print('')
+    print(f"{player2.name}: {player2_totals}")
+    print('')
+    print('')
+    if player1_totals > player2_totals:
+        print(f"{player1.name} Wins")
+    elif player1_totals < player2_totals:
+        print(f"{player2.name} Wins")
+    else:
+        print(f"YOU TIED!")
+def play():
+    """
+    play performs the actual interactive game logic
+
+    :param number_of_players:
+    :return: None
+    """
+    player1 = Player()
+    player1.name = input("Player 1 Enter Your Name:  ")
+    player1.hand = []
+    number_of_players = input(f"Select 1 Player or 2 Players : type 1 or 2 ")
+    while number_of_players:
+        if number_of_players == '2':
+            player2 = Player()
+            player2.name = input("Player 2 Enter Your Name:  ")
+            print("This is a 2 player interactive game, each player will need to select their card from the deck")
+            break
+        elif number_of_players == '1':
+            player2 = Player()
+            player2.name = 'Windows 95'
+            player2.hand = []
+            break
+        else:
+            number_of_players = input(f"Try AGAIN:  type 1 or 2 ")
+    print('')
+    print('')
+    print(f"Player 1: {player1.name} vs Player 2: {player2.name}")
+    print('')
+    print('')
+
+
+
+    while len(player1.hand) < 3 and len(player2.hand) < 3:
+        player1_draw = input(f"{player1.name}, select a card.  Type Y to Draw from Deck:  ")
+        if player1_draw.upper() == 'Y':
+            player1.hand.append(draw_random_card(deck_copy))
+            for card in player1.hand:
+                print(f"{player1.name}'s hand: {card.card_color.name},{card.card_value.value} ")
+        if number_of_players == 2:
+            player2_draw = input(f"{player2.name}, select a card.  Type Y to Draw from Deck:  ")
+        else:
+            player2_draw = 'Y'
+
+        if player2_draw.upper() == 'Y':
+            player2.hand.append(draw_random_card(deck_copy))
+            for compcard in player2.hand:
+                print(f"{player2.name}'s hand: {compcard.card_color.name},{compcard.card_value.value} ")
+    else:
+        calculate_totals(player1, player2)
+
+
+build_deck()
+deck_copy = list(full_deck)
+play_game = input("PLay Color Cards?  : (y/n) : ")
+
+
+if play_game.upper() == 'Y':
+    play()
+
+elif play_game.upper() == 'N':
+    print("Comeback when you are ready to play!  Game will end in 5 seconds.")
+    time.sleep(5)
+    exit()
+else:
+    print(f"You entered {upper(play_game)}!  It seems you arent that serious about playing.  Game will end in 5 seconds.")
+    time.sleep(5)
+    exit()
 
 
