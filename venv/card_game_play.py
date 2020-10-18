@@ -10,10 +10,9 @@ Description:  This is a card game that will support three operations
 """
 from random import *
 from enum import IntEnum, Enum
+import operator
 
-full_deck = []
-partial_deck = []
-shuffle_deck = []
+
 
 class Player:
     """
@@ -60,6 +59,7 @@ def build_deck() -> list:
     for color in CardColor:
         for num in CardNum:
             full_deck.append(CardPlay(CardNum(num), CardColor(color)))
+
     return full_deck
 
 def draw_random_card(deck : list) -> object:
@@ -75,48 +75,48 @@ def draw_random_card(deck : list) -> object:
     except Exception as deck_error:
         return [f"Error: {deck_error}"]
 
-def shuffle_deck(deck : list) -> list:
+def shuffle_cards(deck : list) -> list:
     """
     shuffles deck at random and returns the shuffled list.
     :param deck:
     :return: shuffled deck
     """
-    return shuffle(deck)
+    
+    return sorted(deck, key=lambda k: random())
+def get_ascend(obj):
+    return obj.card_value.value
 
-def sort_cards(sort_criteria : list, sort_list: list) -> list:
+def sort_cards(sorter : list, sort_list: list) -> list:
     """
     sort_cards takes 2 parameters and sort criteria and the list to be sorted.
     :param sort_by:
     :param sort_list:
     :return: list sorted by criteria
     """
-    
-def draw_cards():
-    """
-    this will draw the cards for each players hand and store card in player lists
-    :return:
-    """
-    while len(player_1) < 3 and len(player_1) < 3:
-        player_1.append(draw_random_card(deck_copy))
-        player_2.append(draw_random_card(deck_copy))
-
+    result = [obj for x in sorter for obj in sort_list if obj.card_color.name == x.strip()]
+    result_sorted = sorted(result, key=operator.attrgetter('card_color.name','card_value.value'))
+    for obj in sort_list:
+        if obj not in result_sorted:
+            result_sorted.append(obj)
+    return result_sorted
 
 def calculate_totals(player1, player2):
     print("Game Is Over")
-    player1_totals = sum([x.card_color.value * x.card_value.value for x in player1.hand])
-    player2_totals = sum([x.card_color.value * x.card_value.value for x in player2.hand])
-    print(f"{player1.name}: {player1_totals}")
+    player1.totals = sum([x.card_color.value * x.card_value.value for x in player1.hand])
+    player2.totals = sum([x.card_color.value * x.card_value.value for x in player2.hand])
+    print(f"{player1.name}: {player1.totals}")
     print('')
     print('')
-    print(f"{player2.name}: {player2_totals}")
+    print(f"{player2.name}: {player2.totals}")
     print('')
     print('')
-    if player1_totals > player2_totals:
+    if player1.totals > player2.totals:
         print(f"{player1.name} Wins")
-    elif player1_totals < player2_totals:
+    elif player1.totals < player2.totals:
         print(f"{player2.name} Wins")
     else:
         print(f"YOU TIED!")
+
 def play():
     """
     play performs the actual interactive game logic
@@ -128,11 +128,13 @@ def play():
     player1.name = input("Player 1 Enter Your Name:  ")
     player1.hand = []
     number_of_players = input(f"Select 1 Player or 2 Players : type 1 or 2 ")
+    #this loop handles bad SELECTION.
     while number_of_players:
+
         if number_of_players == '2':
             player2 = Player()
             player2.name = input("Player 2 Enter Your Name:  ")
-            print("This is a 2 player interactive game, each player will need to select their card from the deck")
+            print("2 Player:  EACH player will need to select card from deck")
             break
         elif number_of_players == '1':
             player2 = Player()
@@ -144,36 +146,70 @@ def play():
     print('')
     print('')
     print(f"Player 1: {player1.name} vs Player 2: {player2.name}")
-    print('')
-    print('')
-
-
 
     while len(player1.hand) < 3 and len(player2.hand) < 3:
+        print('')
+        print('')
         player1_draw = input(f"{player1.name}, select a card.  Type Y to Draw from Deck:  ")
+
+        while player1_draw.upper() not in ['Y', 'N']:
+            player1_draw = input(f"Invalid Selection {player1.name}: Type Y to Draw or N to Quit: ")
+
         if player1_draw.upper() == 'Y':
             player1.hand.append(draw_random_card(deck_copy))
-            for card in player1.hand:
-                print(f"{player1.name}'s hand: {card.card_color.name},{card.card_value.value} ")
-        if number_of_players == 2:
+            player1_detail = [(card.card_color.name,card.card_value.value) for card in player1.hand]
+            print(f"{player1.name}'s hand:")
+            print(f"{player1_detail}")
+        elif player1_draw.upper() == 'N':
+            print('')
+            print('')
+            print('Game is exiting')
+            time.sleep(2)
+            exit()
+        else:
+            print('')
+        if number_of_players == '2':
             player2_draw = input(f"{player2.name}, select a card.  Type Y to Draw from Deck:  ")
+            while player1_draw.upper() not in ['Y', 'N']:
+                player2_draw = input(f"Invalid Selection {player2.name}: Type Y to Draw or N to Quit: ")
         else:
             player2_draw = 'Y'
 
         if player2_draw.upper() == 'Y':
             player2.hand.append(draw_random_card(deck_copy))
-            for compcard in player2.hand:
-                print(f"{player2.name}'s hand: {compcard.card_color.name},{compcard.card_value.value} ")
+            player2_detail = [(card.card_color.name, card.card_value.value) for card in player2.hand]
+            print(f"{player2.name}'s hand:")
+            print(f"{player2_detail}")
+        elif player2_draw.upper() == 'N':
+            print('')
+            print('')
+            print('Game is exiting')
+            time.sleep(2)
+            exit()
     else:
         calculate_totals(player1, player2)
 
 
-build_deck()
-deck_copy = list(full_deck)
+full_deck = []
+partial_deck = []
+shuffle_deck = []
+sort_deck = []
+colorlist = []
+
 play_game = input("PLay Color Cards?  : (y/n) : ")
-
-
 if play_game.upper() == 'Y':
+    build_deck()
+    partial_deck = shuffle_cards(full_deck)
+    sort_list = input("Sort deck by color specific colors : Y/N")
+
+    if sort_list.upper() == 'Y':
+        colorlist = input("Type Colors:  Choices(BLUE GREEN RED YELLOW): separate by comma ")
+        colorlist = list(colorlist.upper().split(","))
+        sort_deck = sort_cards(colorlist, partial_deck)
+        print(f"here is your sorted deck: {[(card.card_color.name, card.card_value.value) for card in sort_deck]}")
+        deck_copy = list(sort_deck)
+    else:    
+        deck_copy = list(full_deck)
     play()
 
 elif play_game.upper() == 'N':
@@ -181,8 +217,7 @@ elif play_game.upper() == 'N':
     time.sleep(5)
     exit()
 else:
-    print(f"You entered {upper(play_game)}!  It seems you arent that serious about playing.  Game will end in 5 seconds.")
+    print(f"You entered {play_game.upper()}!  It seems you arent that serious about playing.  Game will end in 5 seconds.")
     time.sleep(5)
     exit()
-
 
