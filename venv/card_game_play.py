@@ -8,11 +8,19 @@ Description:  This is a card game that will support three operations
 
 
 """
-from random import *
-from enum import IntEnum, Enum
+from random import (random,randint)
+from enum import Enum
+import sys
 import operator
+import time
 
 
+FULL_DECK = []
+PARTIAL_DECK = []
+SHUFFLE_DECK = []
+SORT_DECK = []
+COLORLIST = []
+DECK_COPY = []
 
 class Player:
     """
@@ -58,11 +66,11 @@ def build_deck() -> list:
     """
     for color in CardColor:
         for num in CardNum:
-            full_deck.append(CardPlay(CardNum(num), CardColor(color)))
+            FULL_DECK.append(CardPlay(CardNum(num), CardColor(color)))
 
-    return full_deck
+    return FULL_DECK
 
-def draw_random_card(deck : list) -> object:
+def draw_random_card(deck:list) -> object:
     """
     Picks and removes random card from deck and returns that card
     :param deck: This passes a copy of the deck so we dont lose original deck
@@ -70,12 +78,11 @@ def draw_random_card(deck : list) -> object:
     """
     try:
         rand_card = randint(0, len(deck) -1)
-        card = deck.pop(rand_card)
         return deck.pop(rand_card)
     except Exception as deck_error:
         return [f"Error: {deck_error}"]
 
-def shuffle_cards(deck : list) -> list:
+def shuffle_cards(deck:list) -> list:
     """
     shuffles deck at random and returns the shuffled list.
     :param deck:
@@ -83,10 +90,8 @@ def shuffle_cards(deck : list) -> list:
     """
     
     return sorted(deck, key=lambda k: random())
-def get_ascend(obj):
-    return obj.card_value.value
 
-def sort_cards(sorter : list, sort_list: list) -> list:
+def sort_cards(sorter:list, sort_list:list) -> list:
     """
     sort_cards takes 2 parameters and sort criteria and the list to be sorted.
     :param sort_by:
@@ -101,6 +106,12 @@ def sort_cards(sorter : list, sort_list: list) -> list:
     return result_sorted
 
 def calculate_totals(player1, player2):
+    """
+    This takes 2 player objects and calculates the totals of the players cards and displays winner
+    :param player1:
+    :param player2:
+    :return:
+    """
     print("Game Is Over")
     player1.totals = sum([x.card_color.value * x.card_value.value for x in player1.hand])
     player2.totals = sum([x.card_color.value * x.card_value.value for x in player2.hand])
@@ -117,7 +128,7 @@ def calculate_totals(player1, player2):
     else:
         print(f"YOU TIED!")
 
-def play():
+def play(DECK_COPY):
     """
     play performs the actual interactive game logic
 
@@ -156,8 +167,9 @@ def play():
             player1_draw = input(f"Invalid Selection {player1.name}: Type Y to Draw or N to Quit: ")
 
         if player1_draw.upper() == 'Y':
-            player1.hand.append(draw_random_card(deck_copy))
-            player1_detail = [(card.card_color.name,card.card_value.value) for card in player1.hand]
+            player1.hand.append(draw_random_card(DECK_COPY))
+            time.sleep(1)
+            player1_detail = [(card.card_color.name, card.card_value.value) for card in player1.hand]
             print(f"{player1.name}'s hand:")
             print(f"{player1_detail}")
         elif player1_draw.upper() == 'N':
@@ -165,7 +177,7 @@ def play():
             print('')
             print('Game is exiting')
             time.sleep(2)
-            exit()
+            sys.exit()
         else:
             print('')
         if number_of_players == '2':
@@ -176,7 +188,8 @@ def play():
             player2_draw = 'Y'
 
         if player2_draw.upper() == 'Y':
-            player2.hand.append(draw_random_card(deck_copy))
+            player2.hand.append(draw_random_card(DECK_COPY))
+            time.sleep(1)
             player2_detail = [(card.card_color.name, card.card_value.value) for card in player2.hand]
             print(f"{player2.name}'s hand:")
             print(f"{player2_detail}")
@@ -185,39 +198,41 @@ def play():
             print('')
             print('Game is exiting')
             time.sleep(2)
-            exit()
+            sys.exit()
     else:
         calculate_totals(player1, player2)
 
 
-full_deck = []
-partial_deck = []
-shuffle_deck = []
-sort_deck = []
-colorlist = []
 
-play_game = input("PLay Color Cards?  : (y/n) : ")
-if play_game.upper() == 'Y':
-    build_deck()
-    partial_deck = shuffle_cards(full_deck)
-    sort_list = input("Sort deck by color specific colors : Y/N")
+def main():
+    """
+    This is the main function that will run the game process
+    :return:
+    """
+    play_game = input("PLay Color Cards?  : (y/n) : ")
 
-    if sort_list.upper() == 'Y':
-        colorlist = input("Type Colors:  Choices(BLUE GREEN RED YELLOW): separate by comma ")
-        colorlist = list(colorlist.upper().split(","))
-        sort_deck = sort_cards(colorlist, partial_deck)
-        print(f"here is your sorted deck: {[(card.card_color.name, card.card_value.value) for card in sort_deck]}")
-        deck_copy = list(sort_deck)
-    else:    
-        deck_copy = list(full_deck)
-    play()
+    if play_game.upper() == 'Y':
+        build_deck()
+        PARTIAL_DECK = shuffle_cards(FULL_DECK)
+        sort_list = input("Sort deck by color specific colors : Y/N")
+        if sort_list.upper() == 'Y':
+            COLORLIST = input("Type Colors:  Choices(BLUE GREEN RED YELLOW): separate by comma ")
+            COLORLIST = list(COLORLIST.upper().split(","))
+            SORT_DECK = sort_cards(COLORLIST, PARTIAL_DECK)
+            print(f"here is your sorted deck: {[(card.card_color.name, card.card_value.value) for card in SORT_DECK]}")
+            DECK_COPY = list(SORT_DECK)
+        else:    
+            DECK_COPY = list(FULL_DECK)
+        play(DECK_COPY)
+    elif play_game.upper() == 'N':
+        print("Comeback when you are ready to play!  Game will end in 5 seconds.")
+        time.sleep(5)
+        sys.exit()
+    else:
+        print(f"You entered {play_game.upper()}!  It seems you arent that serious about playing. "
+              f" Game will end in 5 seconds.")
+        time.sleep(5)
+        sys.exit()
 
-elif play_game.upper() == 'N':
-    print("Comeback when you are ready to play!  Game will end in 5 seconds.")
-    time.sleep(5)
-    exit()
-else:
-    print(f"You entered {play_game.upper()}!  It seems you arent that serious about playing.  Game will end in 5 seconds.")
-    time.sleep(5)
-    exit()
-
+if __name__ == '__main__':
+    main()
