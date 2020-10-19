@@ -17,7 +17,6 @@ def test_build_deck():
     assert isinstance(deck, list)
     assert len(deck) == 24
 
-
 def test_get_random():
     """
     Tests that the random number doesnt exist in list and no duplicate cards
