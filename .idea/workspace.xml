@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12d637df-d2d3-46a9-b8f1-cd47222b79bd" name="Default" comment="">
+    <list default="true" id="12d637df-d2d3-46a9-b8f1-cd47222b79bd" name="Default" comment="Tests and games functional">
+      <change beforePath="" afterPath="$PROJECT_DIR$/venv/example_test.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/venv/example_view.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/venv/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/card_game_play.py" afterPath="$PROJECT_DIR$/venv/card_game_play.py" />
-      <change beforePath="$PROJECT_DIR$/venv/requirements.txt" afterPath="$PROJECT_DIR$/venv/requirements.txt" />
-      <change beforePath="$PROJECT_DIR$/venv/test_card_game.py" afterPath="$PROJECT_DIR$/venv/test_card_game_play.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,14 +21,34 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="card_game_play.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="card_game_play.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/venv/card_game_play.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-372">
+                <state relative-caret-position="-644">
                   <caret line="169" column="0" lean-forward="false" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
                   <folding>
                     <element signature="e#243#278#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="example_view.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/venv/example_view.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="478">
+                  <caret line="550" column="0" lean-forward="false" selection-start-line="550" selection-start-column="0" selection-end-line="550" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="example_test.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/venv/example_test.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2475">
+                  <caret line="165" column="81" lean-forward="false" selection-start-line="165" selection-start-column="81" selection-end-line="165" selection-end-column="81" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -42,7 +60,7 @@
           <file leaf-file-name="test_card_game_play.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/venv/test_card_game_play.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="150">
+                <state relative-caret-position="-122">
                   <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
                   <folding>
                     <element signature="e#109#122#0" expanded="true" />
@@ -62,6 +80,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>exit()</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -77,6 +100,9 @@
         <option value="$PROJECT_DIR$/venv/test_card_game.py" />
         <option value="$PROJECT_DIR$/venv/test_card_game_play.py" />
         <option value="$PROJECT_DIR$/venv/card_game_play.py" />
+        <option value="$PROJECT_DIR$/venv/Example_view.py" />
+        <option value="$PROJECT_DIR$/venv/example_view.py" />
+        <option value="$PROJECT_DIR$/venv/example_test.py" />
       </list>
     </option>
   </component>
@@ -334,19 +360,27 @@
       <option name="project" value="LOCAL" />
       <updated>1603051721391</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Tests and games functional">
+      <created>1603119766999</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1603119766999</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39903265" sideWeight="0.648784" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.48855507" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5751073" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2453505" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5751073" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2453505" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Pylint" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -395,7 +429,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Starting card game created classes and structured tests" />
     <MESSAGE value="game fully functional, need to finish up testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="game fully functional, need to finish up testing" />
+    <MESSAGE value="Tests and games functional" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests and games functional" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -527,7 +562,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/test_card_game_play.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
+        <state relative-caret-position="-122">
           <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
           <folding>
             <element signature="e#109#122#0" expanded="true" />
@@ -537,11 +572,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/card_game_play.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-372">
+        <state relative-caret-position="-644">
           <caret line="169" column="0" lean-forward="false" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
           <folding>
             <element signature="e#243#278#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/example_view.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="550" column="0" lean-forward="false" selection-start-line="550" selection-start-column="0" selection-end-line="550" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/example_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2475">
+          <caret line="165" column="81" lean-forward="false" selection-start-line="165" selection-start-column="81" selection-end-line="165" selection-end-column="81" />
+          <folding />
         </state>
       </provider>
     </entry>
